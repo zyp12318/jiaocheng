@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>注册</title>
+  <link rel="stylesheet" href="/bootstrap3.3.7/css/bootstrap.css">
+  <link rel="stylesheet" href="/bootstrap3.3.7/css/bootstrap-theme.css">
+  <style>
+
+  </style>
+</head>
+<body>
+
+
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">用户名</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">密码</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword2">重复密码</label>
+      <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+    </div>
+
+    <input id="sub" class="btn btn-success form-control" type="button" value="注册">
+  </form>
+</div>
+
+
+<script type="text/javascript" src="/bootstrap3.3.7/js/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="/bootstrap3.3.7/js/bootstrap.js"></script>
+
+
+<script>
+  /*$(document).ready(function(){
+
+  })*/
+  // click() 方法触发 click 事件，或规定当发生 click 事件时运行的函数。
+  //val() 方法返回或设置被选元素的值。
+  //元素的值是通过 value 属性设置的。该方法大多用于 input 元素。
+  //如果该方法未设置参数，则返回被选元素的当前值。
+  $("#sub").click(function () { //
+    console.info("111")
+    var userName = $("#exampleInputEmail1").val();
+    var password = $("#exampleInputPassword1").val();
+    var rePassword = $("#exampleInputPassword2").val();
+
+    // 用户名是不是为空
+    if (userName.length == 0) {
+      alert("用户名不能为空")
+      return; //不能程序继续往下执行了
+    }
+    //密码是不是为空
+    if (password.length == 0) {
+      alert("密码不能为空")
+      return; //不能程序继续往下执行了
+    }
+
+    //判断密码和重复密码是否一致
+    if (password != rePassword) {
+      alert("两次密码不一致");
+      return;//不能程序继续往下执行了
+    }
+
+    //封装数据，并提交给后端接口
+    var user = {
+      "username": userName,
+      "password": password,
+    }
+
+    //将实体类转换为JSON
+    var userJson = JSON.stringify(user)
+
+    //提交给后端
+    $.post({
+      url: 'user/save',
+      data: userJson,
+      contentType:'application/json',
+      success: function (date) {
+        alert(date)
+        location.href='/index.html';
+      }
+    })
+
+  });
+</script>
+
+</body>
+</html>
